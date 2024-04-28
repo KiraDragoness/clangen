@@ -131,12 +131,11 @@ class Screens():
             Last screen must be tracked to ensure a clear transition between screens."""
         # self.exit_screen()
         game.last_screen_forupdate = self.name
-
         # This keeps track of the last list-like screen for the back button on cat profiles
-        if self.name in ['camp screen', 'list screen', 'events screen']:
+        if self.name in ['camp screen', 'list screen', 'events screen', 'med den screen']:
             game.last_screen_forProfile = self.name
 
-        elif self.name not in ['list screen', 'profile screen']:
+        if self.name not in ['list screen', 'profile screen']:
             game.last_list_forProfile = None
 
         game.switches['cur_screen'] = new_screen

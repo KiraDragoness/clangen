@@ -12,16 +12,18 @@
 		"chance_for_neutral": 10,
 		"chance_of_special_group": 8,
 		"chance_romantic_not_mate": 15,
-		"influence_condition_events": 20,
 		"comment":[
 			"chance_for_neutral - how high the chance is to make the interaction of the relationship to a 'neutral' instead of negative or positive",
 			"chance_of_special_group - 1/chance often when a group event is happening not all cats are considered, only a special group, which is defined in group_types.json",
-			"chance_romantic_not_mate - the base chance of an romantic interaction with another cat, when a cat has a mate",
-			"influence_condition_events - how much an event with a condition can influence the relationship"
+			"chance_romantic_not_mate - the base chance of an romantic interaction with another cat, when a cat has a mate"
 		]
 	},
 	"mates":{
 		"age_range": 40,
+<<<<<<< HEAD
+=======
+		"override_same_age_group": false,
+>>>>>>> parent of b7395f4d0 (Merge branch 'development' into KiraDragoness-fixes)
 		"chance_fulfilled_condition": 5,
 		"chance_friends_to_lovers": 170,
 		"confession": {
