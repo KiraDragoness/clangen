@@ -261,14 +261,14 @@
 		"debug_ensure_event_id": null
 	},
 	"death_related": {
-		"leader_death_chance": 50,
+		"leader_death_chance": 35,
 		"classic_death_chance": 500,
 		"expanded_death_chance": 350,
 		"cruel season_death_chance": 300,
 		"war_death_modifier_leader": 95,
 		"war_death_modifier": 250,
 		"base_random_murder_chance": 25,
-		"base_murder_kill_chance": 80,
+		"base_murder_kill_chance": 100,
 		"old_age_death_start": 150,
 		"old_age_death_curve": 4.5,
 		"comment": [
