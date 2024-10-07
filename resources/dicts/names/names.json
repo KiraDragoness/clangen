@@ -39,7 +39,8 @@
     "zoom",
     "dragon", "earth", "ghost", "magic", "ground", "guardian", "knight", "mind", "seeker", "soul", "emperor", "day", "life",
     "lurker", "hunter", "vessel", "forest", "air", "energy", "time", "eternity", "instinct", "vampire", "wizard", "barbarian", "death", "silence",
-    "demon", "monster"
+    "demon", "monster", "twitch", "squeak", "eater", "stretch", "wilt", "scruff", "bass", "caw", "grunt", "tuck", "nuzzle", "crouch", "fisher",
+    "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn"
   ],
   "pelt_suffixes": {
     "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
@@ -115,9 +116,11 @@
     "Wind", "Wing", "Wish", "Wisteria", "Wolf", "Wolverine", "Wood", "Worm", "Wren", "Yarrow", "Yew", 
     "Zinnia",
     "Dragon", "Wyvern", "Earth", "Eternal", "Time", "Ghost", "Magic", "Mind", "Royal", "Shade", "Spirit", "Soul", "Energy", "Fae", "Wyrm",
-    "Kirin", "Orchid", "Drake", "Hydra", "Sealed", "Pure", "Radiant", "Vampire", "Death", "Life", "Flashy", "Flamboyant",
+    "Kirin", "Orchid", "Drake", "Hydra", "Sealed", "Pure", "Radiant", "Vampire", "Dead", "Living", "Flashy", "Flamboyant",
     "Bull", "Hyena", "Jaguar", "Seal", "Capybara", "Genet", "Monkey", "Quetzal", "Shadow", "Sun", "Owl", "Air", "Demon", "Flame", 
-    "Scorpion", "Monster", "Anaconda", "Boa", "Sequoia", "Baobab", "Banyan", "Gingko", "Camphor", "Enoki", "Hibiscus"
+    "Scorpion", "Monster", "Anaconda", "Boa", "Sequoia", "Baobab", "Banyan", "Gingko", "Camphor", "Enoki", "Hibiscus", "Hen", "Plump",
+    "Opossum", "Tortoise", "Stick", "Blooming", "Thin", "Termite", "Sprig", "Zap", "Eel", "Sturgeon", "Mellow", "Snook", "Glacier",
+    "Somber", "Solemn", "Aurora", "Boreal"
   ],
 
   "clan_prefixes": [
