@@ -1848,11 +1848,9 @@ class SaveAsImage(UIWindow):
 
 
 class EventLoading(UIWindow):
-    """Handles the event loading animation"""
-
     def __init__(self, pos):
         if pos is None:
-            pos = (350, 300)
+            pos = ui_scale_offset((800, 700))
 
         super().__init__(
             ui_scale(pygame.Rect(pos, (100, 100))),
@@ -1867,9 +1865,7 @@ class EventLoading(UIWindow):
         self.end_animation = False
 
         self.animated_image = pygame_gui.elements.UIImage(
-            ui_scale(pygame.Rect(0, 0, 100, 100)),
-            self.frames[0],
-            container=self,
+            ui_scale(pygame.Rect(0, 0, 100, 100)), self.frames[0], container=self
         )
 
         self.animation_thread = threading.Thread(target=self.animate)
@@ -1886,12 +1882,17 @@ class EventLoading(UIWindow):
         return frames
 
     def animate(self):
-        """Loops over the event frames and displays the animation"""
         i = 0
-        while not self.end_animation:
-            i = (i + 1) % (len(self.frames))
+        while True:
+            if self.end_animation:
+                break
+
+            i += 1
+            if i >= len(self.frames):
+                i = 0
 
             self.animated_image.set_image(self.frames[i])
+
             time.sleep(0.125)
 
     def kill(self):

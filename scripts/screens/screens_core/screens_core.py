@@ -424,7 +424,7 @@ def get_camp_bgs():
 
     try:
         camp_nr = game.clan.camp_bg
-        biome = game.clan.biome.lower()
+        biome = game.clan.biome
     except AttributeError:
         camp_nr = "camp1"
         biome = available_biome[0]

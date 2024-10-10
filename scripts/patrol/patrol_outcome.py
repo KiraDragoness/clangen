@@ -306,7 +306,7 @@ class PatrolOutcome:
         allowed_specific = [
             x
             for x in self.can_have_stat
-            if x in ("r_c", "p_l", "app1", "app2", "any", "not_pl_rc", "not_pl")
+            if x in ("r_c", "p_l", "app1", "app2", "any", "not_pl_rc")
         ]
 
         # Special default behavior for patrols less than two cats.
