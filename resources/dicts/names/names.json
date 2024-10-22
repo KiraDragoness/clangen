@@ -40,7 +40,7 @@
     "dragon", "earth", "ghost", "magic", "ground", "guardian", "knight", "mind", "seeker", "soul", "emperor", "day", "life",
     "lurker", "hunter", "vessel", "forest", "air", "energy", "time", "eternity", "instinct", "vampire", "wizard", "barbarian", "death", "silence",
     "demon", "monster", "twitch", "squeak", "eater", "stretch", "wilt", "scruff", "bass", "caw", "grunt", "tuck", "nuzzle", "crouch", "fisher",
-    "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn"
+    "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn", "skull"
   ],
   "pelt_suffixes": {
     "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
