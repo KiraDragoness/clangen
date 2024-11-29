@@ -37,10 +37,11 @@
     "thistle", "thorn", "thrift", "throat", "thrush", "thud", "thunder", "tiger", "timber", "toe", "tooth", "trail", "tree", 
     "trot", "tumble", "twist", "valley", "watcher", "water", "wave", "web", "whisper", "whistle", "willow", "wind", "wing", "wish", "wisp", 
     "zoom",
-    "dragon", "earth", "ghost", "magic", "ground", "guardian", "knight", "mind", "seeker", "soul", "emperor", "day", "life",
+    "dragon", "earth", "ghost", "magic", "ground", "guardian", "knight", "mind", "seeker", "soul", "day", "life",
     "lurker", "hunter", "vessel", "forest", "air", "energy", "time", "eternity", "instinct", "vampire", "wizard", "barbarian", "death", "silence",
     "demon", "monster", "twitch", "squeak", "eater", "stretch", "wilt", "scruff", "bass", "caw", "grunt", "tuck", "nuzzle", "crouch", "fisher",
-    "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn", "skull"
+    "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn", "skull",
+    "pride", "lust", "wrath", "envy", "gluttony", "sloth", "greed", "power", "glow", "tornado", "hurricane", "stalker", "beast"
   ],
   "pelt_suffixes": {
     "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
@@ -120,7 +121,8 @@
     "Bull", "Hyena", "Jaguar", "Seal", "Capybara", "Genet", "Monkey", "Quetzal", "Shadow", "Sun", "Owl", "Air", "Demon", "Flame", 
     "Scorpion", "Monster", "Anaconda", "Boa", "Sequoia", "Baobab", "Banyan", "Gingko", "Camphor", "Enoki", "Hibiscus", "Hen", "Plump",
     "Opossum", "Tortoise", "Stick", "Blooming", "Thin", "Termite", "Sprig", "Zap", "Eel", "Sturgeon", "Mellow", "Snook", "Glacier",
-    "Somber", "Solemn", "Aurora", "Boreal"
+    "Somber", "Solemn", "Aurora", "Boreal", "Ancient", "Proud", "Angry", "Happy", "Lazy", "Greedy", "Hungry", "Power", "Silky", "Eel",
+    "Stripe", "Stretch", "Float", "Rustle", "Dangling", "Arc", "Tornado", "Hurricane", "Beast"
   ],
 
   "clan_prefixes": [
