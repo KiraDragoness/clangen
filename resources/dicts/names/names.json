@@ -41,7 +41,8 @@
     "lurker", "hunter", "vessel", "forest", "air", "energy", "time", "eternity", "instinct", "vampire", "wizard", "barbarian", "death", "silence",
     "demon", "monster", "twitch", "squeak", "eater", "stretch", "wilt", "scruff", "bass", "caw", "grunt", "tuck", "nuzzle", "crouch", "fisher",
     "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn", "skull",
-    "pride", "lust", "wrath", "envy", "gluttony", "sloth", "greed", "power", "glow", "tornado", "hurricane", "stalker", "beast"
+    "pride", "lust", "wrath", "envy", "gluttony", "sloth", "greed", "power", "glow", "tornado", "hurricane", "stalker", "beast", "blood",
+    "myth", "warrior", "fight", "battle", "legend", "purr", "tracker", "scent"
   ],
   "pelt_suffixes": {
     "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
@@ -122,7 +123,8 @@
     "Scorpion", "Monster", "Anaconda", "Boa", "Sequoia", "Baobab", "Banyan", "Gingko", "Camphor", "Enoki", "Hibiscus", "Hen", "Plump",
     "Opossum", "Tortoise", "Stick", "Blooming", "Thin", "Termite", "Sprig", "Zap", "Eel", "Sturgeon", "Mellow", "Snook", "Glacier",
     "Somber", "Solemn", "Aurora", "Boreal", "Ancient", "Proud", "Angry", "Happy", "Lazy", "Greedy", "Hungry", "Power", "Silky", "Eel",
-    "Stripe", "Stretch", "Float", "Rustle", "Dangling", "Arc", "Tornado", "Hurricane", "Beast"
+    "Stripe", "Stretch", "Float", "Rustle", "Dangling", "Arc", "Tornado", "Hurricane", "Beast", "Basilisk", "Bloody", "Ancestral",
+    "Mythic", "Fighting", "Giraffe"
   ],
 
   "clan_prefixes": [
