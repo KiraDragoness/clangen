@@ -31,7 +31,8 @@ class Scar_Events():
     claw_scars = [
         "ONE", "TWO", "SNOUT", "TAILSCAR", "CHEEK",
         "SIDE", "THROAT", "TAILBASE", "BELLY", "FACE",
-        "BRIDGE", "HINDLEG", "BACK", "SCRATCHSIDE"
+        "BRIDGE", "HINDLEG", "BACK", "SCRATCHSIDE", "THREE",
+        "RIGHTBLIND", "LEFTBLIND", "BOTHBLIND"
     ]
     leg_scars = [
         "NOPAW", "TOETRAP", "MANLEG", "FOUR"
@@ -102,7 +103,7 @@ class Scar_Events():
         if medical_cats_condition_fulfilled(game.cat_class.all_cats.values(), amount_per_med):
             chance += 2
 
-        if len(cat.pelt.scars) < 4 and not int(random.random() * chance):
+        if not int(random.random() * chance):
 
             # move potential scar text into displayed scar text
 
