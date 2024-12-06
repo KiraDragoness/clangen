@@ -42,7 +42,7 @@
     "demon", "monster", "twitch", "squeak", "eater", "stretch", "wilt", "scruff", "bass", "caw", "grunt", "tuck", "nuzzle", "crouch", "fisher",
     "ridge", "doe", "climb", "hoot", "stomp", "touch", "beacon", "jolt", "glacier", "aurora", "evening", "morning", "scale", "horn", "skull",
     "pride", "lust", "wrath", "envy", "gluttony", "sloth", "greed", "power", "glow", "tornado", "hurricane", "stalker", "beast", "blood",
-    "myth", "warrior", "fight", "battle", "legend", "purr", "tracker", "scent"
+    "myth", "warrior", "fight", "battle", "legend", "purr", "tracker", "scent", "finder", "war", "killer"
   ],
   "pelt_suffixes": {
     "TwoColour": ["patch", "spot", "splash", "patch", "spots", "swan"],
@@ -124,7 +124,7 @@
     "Opossum", "Tortoise", "Stick", "Blooming", "Thin", "Termite", "Sprig", "Zap", "Eel", "Sturgeon", "Mellow", "Snook", "Glacier",
     "Somber", "Solemn", "Aurora", "Boreal", "Ancient", "Proud", "Angry", "Happy", "Lazy", "Greedy", "Hungry", "Power", "Silky", "Eel",
     "Stripe", "Stretch", "Float", "Rustle", "Dangling", "Arc", "Tornado", "Hurricane", "Beast", "Basilisk", "Bloody", "Ancestral",
-    "Mythic", "Fighting", "Giraffe"
+    "Mythic", "Fighting", "Giraffe", "Phoenix", "Stygian", "Savage", "Magma", "Fulgur"
   ],
 
   "clan_prefixes": [
@@ -449,7 +449,10 @@
     "Kazuma", "Kofuku", "Daikoku", "Armstrong", "Hohenheim", "Scar", "Astarion", "Gale", "Laezel", "Karlach", "Wyll", "Jaheira", "Minsc", "Minthara", "Halsin", "Zevlor", "Raphael", "Gortash", "Bhaal", "Orin",
     "Ketheric", "Faerun", "Shar", "Selune", "Mystra", "Balthazar", "Absolute", "Cazador", "Szarr", "Vampire", "Mol", "Balduran", "Kagha", "Orpheus", "Dame Aylin", "Isobel", "Tiamat", "Zariel", "Mizora",
     "Withers", "Elminster", "Aasimar", "Tanjiro", "Kamado", "Nezuko", "Zenitsu", "Inosuke", "Tengen", "Uzui", "Makio", "Suma", "Hinatsuru", "Rengoku", "Tomioka", "Shinobu", "Kanroji", "Tokito", "Muzan", "Kibutsuji",
-    "Devil", "Yuiichiro", "Akaza", "Daki", "Gyutaro", "Ubuyashiki", "Gyomei", "Obanai", "Sanemi", "Genya", "Kanae", "Nichirin", "Kimetsu", "Haganezuka", "Giyuu", "Kyojuro", "Kocho", "Malinois"
+    "Devil", "Yuiichiro", "Akaza", "Daki", "Gyutaro", "Ubuyashiki", "Gyomei", "Obanai", "Sanemi", "Genya", "Kanae", "Nichirin", "Kimetsu", "Haganezuka", "Giyuu", "Kyojuro", "Kocho", "Malinois",
+    "Velkhana", "Fatalis", "Vaal Hazak", "Kushala Daora", "Teostra", "Xenojiiva", "Safijiiva", "Alatreon", "Brachydios", "Odogaron", "Nargacuga", "Lunastra", "Shara Ishvalda", "Rathalos", "Rathian",
+    "Zinogre", "Malzeno", "Lunagaron", "Diablos", "Almudron", "Bazelgeuse", "Deviljho", "Rajang", "Anjanath", "Jagras", "Narwa", "Magnamalo", "Lagiacrus", "Legiana", "Namielle", "Rey Dau", "Uth Duna",
+    "Doshaguma", "Riku", "Chispi", "Nergigante"
   ],
 	"animal_suffixes": [
 		"badger", "bat", "bear", "bee", "beetle", "bird", "bug", "cricket", "deer", "eagle", "elk", "falcon", "fawn", "fish", "fox", "goose", "hare", "hawk", "horse", 
