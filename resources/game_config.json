@@ -267,7 +267,7 @@
 		"debug_ensure_event_id": null
 	},
 	"death_related": {
-		"leader_death_chance": 35,
+		"leader_death_chance": 20,
 		"classic_death_chance": 500,
 		"expanded_death_chance": 350,
 		"cruel season_death_chance": 300,
