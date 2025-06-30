@@ -286,9 +286,11 @@ class SpriteInspectScreen(Screens):
             "",
             object_id="#fav_star" if self.the_cat.favourite else "#not_fav_star",
             manager=MANAGER,
-            tool_tip_text="general.remove_favorite"
-            if self.the_cat.favourite
-            else "general.mark_favorite",
+            tool_tip_text=(
+                "general.remove_favorite"
+                if self.the_cat.favourite
+                else "general.mark_favorite"
+            ),
             starting_height=2,
             anchors={"right": "right", "right_target": self.cat_elements["cat_name"]},
         )
@@ -464,7 +466,11 @@ class SpriteInspectScreen(Screens):
             light_dark = "dark"
 
         available_biome = ["Forest", "Mountainous", "Plains", "Beach"]
-        biome = game.clan.biome
+        biome = (
+            game.clan.biome
+            if not game.clan.override_biome
+            else game.clan.override_biome
+        )
 
         if biome not in available_biome:
             biome = available_biome[0]

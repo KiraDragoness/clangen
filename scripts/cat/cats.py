@@ -15,6 +15,7 @@ import i18n
 import pygame
 import ujson  # type: ignore
 
+import scripts.game_structure.localization as pronouns
 from scripts.cat.enums import CatAgeEnum
 from scripts.cat.history import History
 from scripts.cat.names import Name
@@ -36,6 +37,7 @@ from scripts.event_class import Single_Event
 from scripts.events_module.generate_events import GenerateEvents
 from scripts.game_structure import image_cache
 from scripts.game_structure.game_essentials import game
+from scripts.game_structure.localization import load_lang_resource
 from scripts.game_structure.screen_settings import screen
 from scripts.housekeeping.datadir import get_save_dir
 from scripts.utility import (
@@ -47,9 +49,6 @@ from scripts.utility import (
     leader_ceremony_text_adjust,
     update_mask,
 )
-from scripts.game_structure.localization import load_lang_resource
-
-import scripts.game_structure.localization as pronouns
 
 import scripts.game_structure.screen_settings
 
@@ -305,7 +304,11 @@ class Cat:
         if "biome" in kwargs:
             biome = kwargs["biome"]
         elif game.clan is not None:
-            biome = game.clan.biome
+            biome = (
+                game.clan.biome
+                if not game.clan.override_biome
+                else game.clan.override_biome
+            )
         else:
             biome = None
         # NAME
@@ -3374,9 +3377,11 @@ class Cat:
                 [
                     self.genderalign,
                     i18n.t(
-                        f"general.{self.age}"
-                        if self.age != "kitten"
-                        else "general.kitten_profile",
+                        (
+                            f"general.{self.age}"
+                            if self.age != "kitten"
+                            else "general.kitten_profile"
+                        ),
                         count=1,
                     ),
                     i18n.t(f"cat.personality.{self.personality.trait}"),
@@ -3412,6 +3417,7 @@ class Cat:
                 i18n.t(f"general.{self.status.lower()}", count=1),
                 self.genderalign,
                 i18n.t(f"cat.personality.{self.personality.trait}"),
+                self.skills.skill_string(short=True),
             ]
         )
 
@@ -3438,9 +3444,11 @@ class Cat:
                 "specsuffix_hidden": self.name.specsuffix_hidden,
                 "gender": self.gender,
                 "gender_align": self.genderalign,
-                "pronouns": self._pronouns
-                if self._pronouns is not None
-                else {i18n.config.get("locale"): self.pronouns},
+                "pronouns": (
+                    self._pronouns
+                    if self._pronouns is not None
+                    else {i18n.config.get("locale"): self.pronouns}
+                ),
                 "birth_cooldown": self.birth_cooldown,
                 "status": self.status,
                 "backstory": self.backstory or None,

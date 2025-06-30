@@ -38,7 +38,7 @@ from scripts.housekeeping.datadir import (
     get_save_dir,
     get_cache_dir,
     get_saved_images_dir,
-    get_data_dir,
+    open_data_dir,
 )
 from scripts.housekeeping.progress_bar_updater import UIUpdateProgressBar
 from scripts.housekeeping.update import (
@@ -425,7 +425,7 @@ class EditorSaveCheck(UIWindow):
 
 
 class EditorMissingInfo(UIWindow):
-    def __init__(self):
+    def __init__(self, alert_text):
         super().__init__(
             ui_scale(pygame.Rect((200, 200), (400, 200))),
             window_display_title="Info Missing",
@@ -434,13 +434,16 @@ class EditorMissingInfo(UIWindow):
             always_on_top=True,
         )
 
+        text = "windows.editor_missing_info" if not alert_text else alert_text
         self.missing_info = UITextBoxTweaked(
-            "windows.editor_missing_info",
-            ui_scale(pygame.Rect((0, -30), (360, -1))),
+            text,
+            ui_scale(pygame.Rect((0, 30), (360, -1))),
             line_spacing=1,
             object_id="#text_box_30_horizcenter",
             container=self,
-            anchors={"centerx": "centerx", "centery": "centery"},
+            anchors={
+                "centerx": "centerx",
+            },
         )
 
         self.back_button = UIImageButton(
@@ -964,24 +967,28 @@ class PronounCreation(UIWindow):
                 object_id="#text_box_30_horizcenter_spacing_95",
                 manager=MANAGER,
                 container=self.elements["core_container"],
-                anchors={"top_target": self.box_labels[text_inputs[i - 1]]}
-                if i > 0
-                else {"top_target": self.dropdowns["gender_label"]},
+                anchors=(
+                    {"top_target": self.box_labels[text_inputs[i - 1]]}
+                    if i > 0
+                    else {"top_target": self.dropdowns["gender_label"]}
+                ),
             )
             self.boxes[item] = pygame_gui.elements.UITextEntryLine(
                 ui_scale(pygame.Rect((0, 5), (150, 30))),
                 placeholder_text=self.the_cat.pronouns[0][item],
                 manager=MANAGER,
                 container=self,
-                anchors={
-                    "top_target": self.boxes[text_inputs[i - 1]],
-                    "left_target": self.box_labels[item],
-                }
-                if i > 0
-                else {
-                    "top_target": self.dropdowns["gender_label"],
-                    "left_target": self.box_labels[item],
-                },
+                anchors=(
+                    {
+                        "top_target": self.boxes[text_inputs[i - 1]],
+                        "left_target": self.box_labels[item],
+                    }
+                    if i > 0
+                    else {
+                        "top_target": self.dropdowns["gender_label"],
+                        "left_target": self.box_labels[item],
+                    }
+                ),
             )
             self.boxes[item].set_allowed_characters("alpha_numeric")
 
@@ -1667,7 +1674,7 @@ class RelationshipLog(UIWindow):
             )
             self.opp_heading = pygame_gui.elements.UITextBox(
                 "windows.other_perspective",
-                ui_scale(pygame.Rect((15, 275), (476, 280))),
+                ui_scale(pygame.Rect((15, 275), (-1, -1))),
                 object_id="#text_box_30_horizleft",
                 manager=MANAGER,
                 container=self,
@@ -1837,15 +1844,7 @@ class SaveAsImage(UIWindow):
             if event.ui_element == self.close_button:
                 self.kill()
             elif event.ui_element == self.open_data_directory_button:
-                if system() == "Darwin":
-                    subprocess.Popen(["open", "-R", get_data_dir()])
-                elif system() == "Windows":
-                    os.startfile(get_data_dir())  # pylint: disable=no-member
-                elif system() == "Linux":
-                    try:
-                        subprocess.Popen(["xdg-open", get_data_dir()])
-                    except OSError:
-                        logger.exception("Failed to call to xdg-open.")
+                open_data_dir()
                 return True
             elif event.ui_element == self.save_as_image:
                 file_name = self.save_image()
@@ -2009,9 +2008,9 @@ class ChangeCatToggles(UIWindow):
             ui_scale(pygame.Rect((22, 50), (34, 34))),
             "",
             container=self,
-            object_id="@checked_checkbox"
-            if self.the_cat.no_kits
-            else "@unchecked_checkbox",
+            object_id=(
+                "@checked_checkbox" if self.the_cat.no_kits else "@unchecked_checkbox"
+            ),
             tool_tip_text="windows.prevent_kits_tooltip",
         )
 
@@ -2020,12 +2019,14 @@ class ChangeCatToggles(UIWindow):
             ui_scale(pygame.Rect((22, 75), (34, 34))),
             "",
             container=self,
-            object_id="@checked_checkbox"
-            if self.the_cat.no_retire
-            else "@unchecked_checkbox",
-            tool_tip_text="windows.prevent_retirement_tooltip_yes"
-            if self.the_cat.no_retire
-            else "windows.prevent_retirement_tooltip_no",
+            object_id=(
+                "@checked_checkbox" if self.the_cat.no_retire else "@unchecked_checkbox"
+            ),
+            tool_tip_text=(
+                "windows.prevent_retirement_tooltip_yes"
+                if self.the_cat.no_retire
+                else "windows.prevent_retirement_tooltip_no"
+            ),
         )
 
         # No mates
@@ -2033,9 +2034,9 @@ class ChangeCatToggles(UIWindow):
             ui_scale(pygame.Rect((22, 100), (34, 34))),
             "",
             container=self,
-            object_id="@checked_checkbox"
-            if self.the_cat.no_mates
-            else "@unchecked_checkbox",
+            object_id=(
+                "@checked_checkbox" if self.the_cat.no_mates else "@unchecked_checkbox"
+            ),
             tool_tip_text="windows.prevent_romance_tooltip",
         )
 

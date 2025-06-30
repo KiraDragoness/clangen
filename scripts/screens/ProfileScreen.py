@@ -10,8 +10,6 @@ import pygame_gui
 import ujson
 
 from scripts.cat.cats import Cat, BACKSTORIES
-from ..cat.enums import CatAgeEnum
-from scripts.cat.pelts import Pelt
 from scripts.clan_resources.freshkill import FRESHKILL_ACTIVE
 from scripts.game_structure import image_cache
 from scripts.game_structure.game_essentials import game
@@ -32,6 +30,7 @@ from scripts.utility import (
     adjust_list_text,
 )
 from .Screens import Screens
+from ..cat.enums import CatAgeEnum
 from ..cat.history import History
 from ..game_structure.localization import get_new_pronouns
 from ..game_structure.screen_settings import MANAGER
@@ -633,9 +632,11 @@ class ProfileScreen(Screens):
             "",
             object_id="#fav_star" if self.the_cat.favourite else "#not_fav_star",
             manager=MANAGER,
-            tool_tip_text="general.remove_favorite"
-            if self.the_cat.favourite
-            else "general.mark_favorite",
+            tool_tip_text=(
+                "general.remove_favorite"
+                if self.the_cat.favourite
+                else "general.mark_favorite"
+            ),
             starting_height=2,
             anchors={
                 "right": "right",
@@ -2175,11 +2176,15 @@ class ProfileScreen(Screens):
                 "",
                 get_button_dict(ButtonStyles.LADDER_TOP, (172, 36)),
                 object_id="@buttonstyles_ladder_top",
-                tool_tip_text="screens.profile.exile_guide_tooltip"
-                if self.the_cat.dead and game.clan.instructor.ID == self.the_cat.ID
-                else "screens.profile.exile_tooltip"
-                if not self.the_cat.dead
-                else None,
+                tool_tip_text=(
+                    "screens.profile.exile_guide_tooltip"
+                    if self.the_cat.dead and game.clan.instructor.ID == self.the_cat.ID
+                    else (
+                        "screens.profile.exile_tooltip"
+                        if not self.the_cat.dead
+                        else None
+                    )
+                ),
                 starting_height=2,
                 manager=MANAGER,
             )
@@ -2389,7 +2394,11 @@ class ProfileScreen(Screens):
             light_dark = "dark"
 
         available_biome = ["Forest", "Mountainous", "Plains", "Beach"]
-        biome = game.clan.biome
+        biome = (
+            game.clan.biome
+            if not game.clan.override_biome
+            else game.clan.override_biome
+        )
 
         if biome not in available_biome:
             biome = available_biome[0]
