@@ -1,26 +1,22 @@
+import os
+import platform
+import subprocess
 from random import choice
 
 import pygame
 import pygame_gui
-import os
-import platform
-import subprocess
 import ujson
 
 from scripts.cat.cats import Cat, BACKSTORIES, create_option_preview_cat
 from scripts.cat.pelts import Pelt
 from scripts.cat.personality import Personality
-from scripts.cat.skills import SkillPath, Skill
+from scripts.cat.skills import SkillPath
 from scripts.events_module.short.condition_events import Condition_Events
-from scripts.events_module.short.handle_short_events import (
-    INJURY_GROUPS,
-    EVENT_ALLOWED_CONDITIONS,
-    HandleShortEvents,
-)
+from scripts.events_module.short.handle_short_events import HandleShortEvents
 from scripts.events_module.short.scar_events import Scar_Events
-from scripts.game_structure import image_cache
+from scripts.game_structure import image_cache, constants
 from scripts.game_structure.game_essentials import game
-from scripts.game_structure.localization import load_lang_resource, get_default_pronouns
+from scripts.game_structure.localization import get_default_pronouns
 from scripts.game_structure.screen_settings import MANAGER
 from scripts.game_structure.ui_elements import (
     UISurfaceImageButton,
@@ -150,9 +146,9 @@ class EventEditScreen(Screens):
     new_cat_genders: list = TAGS["new_cat"]["genders"]
     """List of all gender tags available to new cats"""
 
-    all_injury_pools: dict = INJURY_GROUPS
+    all_injury_pools: dict = constants.INJURY_GROUPS
     """Dict of all injury pools. Key is pool name, value is the injuries within the pool."""
-    all_possible_injuries: list = EVENT_ALLOWED_CONDITIONS
+    all_possible_injuries: list = constants.EVENT_ALLOWED_CONDITIONS
     """List of all possible injuries/conditions."""
     fatal_conditions: list = []
     """We need this for death history validity checking. This is a list of all conditions that can kill."""
@@ -175,10 +171,11 @@ class EventEditScreen(Screens):
     all_scars: list = Pelt.scars1 + Pelt.scars2 + Pelt.scars3
     """List of all possible scars"""
 
-    all_outsider_reps: list = game.outsider_reps.copy()
+    all_outsider_reps: list = list(constants.OUTSIDER_REPS)
     """List of all possible outsider reputation levels."""
     all_outsider_reps.append("any")
-    all_other_clan_reps: list = game.other_clan_reps.copy()
+
+    all_other_clan_reps: list = list(constants.OTHER_CLAN_REPS)
     """List of all possible other clan relationship levels."""
     all_other_clan_reps.append("any")
 
@@ -475,7 +472,7 @@ class EventEditScreen(Screens):
         biome = "general"
         matching_biomes = []
         for location in event.get("location"):
-            for biome in game.BIOME_TYPES:
+            for biome in constants.BIOME_TYPES:
                 if biome.casefold() in location:
                     matching_biomes.append(biome)
         if len(matching_biomes) <= 1:
@@ -648,27 +645,47 @@ class EventEditScreen(Screens):
             new_event["r_c"]["backstory"] = self.random_cat_info["backstory"]
         if self.random_cat_info["dies"]:
             new_event["r_c"]["dies"] = self.random_cat_info["dies"]
+        if not new_event["r_c"]:
+            new_event.pop("r_c")
 
         if self.new_cat_block_dict:
-            new_event["new_cat"] = self.new_cat_block_dict.values()
+            new_event["new_cat"] = list(self.new_cat_block_dict.values())
 
         if self.injury_block_list:
+            for block in self.injury_block_list:
+                if not block["scars"]:
+                    block.pop("scars")
             new_event["injury"] = self.injury_block_list
 
         if self.excluded_cats:
             new_event["exclude_involved"] = self.excluded_cats
 
         if self.history_block_list:
+            for block in self.history_block_list:
+                if not block["scar"]:
+                    block.pop("scar")
+                if not block["reg_death"]:
+                    block.pop("reg_death")
+                if not block["lead_death"]:
+                    block.pop("lead_death")
             new_event["history"] = self.history_block_list
 
         if self.relationships_block_list:
             new_event["relationships"] = self.relationships_block_list
 
         if self.outsider_info["current_rep"] or self.outsider_info["changed"]:
-            new_event["outsider"] = self.outsider_info
+            new_event["outsider"] = {}
+            if self.outsider_info["current_rep"]:
+                new_event["current_rep"] = self.outsider_info["current_rep"]
+            if self.outsider_info["changed"]:
+                new_event["changed"] = int(self.outsider_info["changed"])
 
-        if self.other_clan_info["current_rep"] or self.outsider_info["changed"]:
-            new_event["other_clan"] = self.other_clan_info
+        if self.other_clan_info["current_rep"] or self.other_clan_info["changed"]:
+            new_event["other_clan"] = {}
+            if self.other_clan_info["current_rep"]:
+                new_event["current_rep"] = self.other_clan_info["current_rep"]
+            if self.other_clan_info["changed"]:
+                new_event["changed"] = int(self.other_clan_info["changed"])
 
         if self.supply_block_list:
             new_event["supplies"] = self.supply_block_list
@@ -690,7 +707,7 @@ class EventEditScreen(Screens):
         biome_path = "general"
         for locale in self.location_info:
             biome = locale.split("_")[0]
-            if biome.capitalize() in game.BIOME_TYPES:
+            if biome.capitalize() in constants.BIOME_TYPES:
                 biomes.append(biome)
         if len(biomes) == 1 and "any" not in biomes:
             biome_path = biomes[0]
@@ -1399,7 +1416,7 @@ class EventEditScreen(Screens):
 
         path = "resources/lang/en/events"
         type_list = list(self.event_types.keys())
-        all_biomes = game.BIOME_TYPES.copy()
+        all_biomes = constants.BIOME_TYPES.copy()
         all_biomes.append("general")
 
         if not event_type:
@@ -1459,6 +1476,7 @@ class EventEditScreen(Screens):
                 )
                 test_dict[abbr] = (self.test_cat_names[abbr], pronoun)
             preview = process_text(event["event_text"], test_dict)
+            game.event_editing = True
             self.event_buttons[index] = UISurfaceImageButton(
                 ui_scale(pygame.Rect((0, -2 if index > 0 else 0), (234, 36))),
                 event["event_id"],
@@ -1500,6 +1518,13 @@ class EventEditScreen(Screens):
         """
         Clears all the saved event info, so we can start fresh.
         """
+        # resetting all tag lists
+        for tag in self.basic_tag_list:
+            tag["setting"] = False
+        for tag in self.rel_tag_list:
+            tag["setting"] = False
+        for tag in self.new_cat_bools:
+            tag["setting"] = False
         # Settings elements
         self.event_text_info = ""
         self.event_id_element = {}
@@ -1555,7 +1580,7 @@ class EventEditScreen(Screens):
             if not self.param_locks.get("main_age")
             else reference_dict["age"],
             "rel_status": []
-            if not self.param_locks.get("get_rel_status")
+            if not self.param_locks.get("main_rel_status")
             else reference_dict["rel_status"],
             "dies": False
             if not self.param_locks.get("main_dies")
@@ -1576,6 +1601,9 @@ class EventEditScreen(Screens):
             if not self.param_locks.get("main_backstory")
             else reference_dict["backstory"],
         }
+        if not self.param_locks.get("main_rel_status"):
+            for tag in self.rel_tag_list:
+                tag["setting"] = False
         reference_dict = self.random_cat_info.copy()
         self.random_cat_info = {
             "rank": []
@@ -1585,7 +1613,7 @@ class EventEditScreen(Screens):
             if not self.param_locks.get("random_age")
             else reference_dict["age"],
             "rel_status": []
-            if not self.param_locks.get("get_rel_status")
+            if not self.param_locks.get("random_rel_status")
             else reference_dict["rel_status"],
             "dies": False
             if not self.param_locks.get("random_dies")
@@ -1880,7 +1908,20 @@ class EventEditScreen(Screens):
         involved_cats.extend(new_cat_list)
 
         if include_clan:
-            involved_cats.extend(["some_clan", "clan"])
+            involved_cats.extend(
+                [
+                    "some_clan",
+                    "clan",
+                    "low_lawful",
+                    "high_lawful",
+                    "low_social",
+                    "high_social",
+                    "low_stable",
+                    "high_stable",
+                    "low_aggress",
+                    "high_aggress",
+                ]
+            )
 
         return involved_cats
 
@@ -2781,7 +2822,7 @@ class EventEditScreen(Screens):
     def handle_settings_events(self, event):
         # CHANGE LOCATION LIST
         if event.ui_element in self.location_element.values():
-            biome_list = game.clan.BIOME_TYPES
+            biome_list = constants.BIOME_TYPES
             for biome in biome_list:
                 if event.ui_element == self.location_element[biome]:
                     self.update_location_info(biome=biome)
@@ -7516,7 +7557,7 @@ class EventEditScreen(Screens):
             container=self.editor_container,
             anchors={"top_target": self.editor_element["event_id"]},
         )
-        biome_list = game.clan.BIOME_TYPES
+        biome_list = constants.BIOME_TYPES
         prev_element = None
         for biome in biome_list:
             y_pos = 10 if not prev_element else -2
