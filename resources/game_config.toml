@@ -44,16 +44,16 @@ dev_tools = false
 
 [mates]
   # maximum age difference allowed for cats to be romantic with each other
-  age_range = 40
+  age_range = 42
 
   # if true, disables the same-age group check
   override_same_age_group = false
 
   # 1/chance of becoming mates when the conditions are fulfilled
-  chance_fulfilled_condition = 5
+  chance_fulfilled_condition = 2
 
   # 1/chance of becoming mates, triggers with friends_to_lover (has to be a high number because many relationships are checked each moon)
-  chance_friends_to_lovers = 170
+  chance_friends_to_lovers = 50
 
   # NOTE FOR RELATIONSHIP CONSTRAINTS
   #  0: no condition
@@ -63,31 +63,31 @@ dev_tools = false
   [mates.confession]
     # if one cat has these feelings for another, they confess (if there are more, the highest romantic will be chosen)
     [mates.confession.make_confession]
-    romantic = 30
-    platonic = 15
-    dislike = -15
+    romantic = 20
+    platonic = 10
+    dislike = -10
     admiration = 0
-    comfortable = 10
+    comfortable = 5
     jealousy = 0
     trust = 0
 
     # if these conditions are fulfilled by the opposite cat, they accept, otherwise, they reject
     [mates.confession.accept_confession]
-    romantic = 17
-    platonic = 15
-    dislike = -10
+    romantic = 12
+    platonic = 10
+    dislike = -5
     admiration = 0
-    comfortable = 10
+    comfortable = 5
     jealousy = 0
     trust = 0
 
   # both relationships have to fulfill this condition to become mates
   [mates.mate_condition]
-    romantic = 20
-    platonic = 30
-    dislike = -10
+    romantic = 10
+    platonic = 20
+    dislike = -5
     admiration = 0
-    comfortable = 20
+    comfortable = 15
     jealousy = 0
     trust = 0
 
@@ -197,17 +197,17 @@ dev_tools = false
   birth_cooldown = 6
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_mated = 80
+  primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 130
+  primary_chance_unmated = 250
 
   # 1/chance that a mated cat to has an affair
   random_affair_chance = 50
 
   # special 1/chance for an unmated cat to have an affair
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 10
+  unmated_random_affair_chance = 1
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
@@ -283,7 +283,7 @@ dev_tools = false
   always_name_after_appearance = false
 
   # allows cats to be named after the color of their eyes
-  allow_eye_names = true
+  allow_eye_names = false
 
 [accessory_generation]
   # base 1/chance a cat generates with an accessory 
@@ -415,7 +415,7 @@ dev_tools = false
 
 [death_related]
   # base 1/chance that leader will die
-  leader_death_chance = 50
+  leader_death_chance = 15
 
   # base 1/chance a cat will die
   classic_death_chance = 500
@@ -424,7 +424,7 @@ dev_tools = false
 
   # modifiers for death chance based on if a war is going badly
   # SUBTRACTS from the denominator so higher = more likely to die
-  war_death_modifier_leader = 35
+  war_death_modifier_leader = 5
   war_death_modifier = 330
 
   # base 1/2^(chance) a completely random murder occurs
