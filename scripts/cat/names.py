@@ -230,7 +230,7 @@ class Name:
                 names.prefix_history.pop(0)
 
     # Generate possible suffix
-    def give_suffix(self, pelt, biome):
+    def give_suffix(self, pelt, biome, tortiepattern):
         """Generate possible suffix."""
         if pelt is None or pelt == "SingleColour":
             self.suffix = random.choice(self.names_dict["normal_suffixes"])
