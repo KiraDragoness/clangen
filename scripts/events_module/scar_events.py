@@ -135,7 +135,7 @@ class Scar_Events():
                 scar_pool = [i for i in scar_pool if i not in ['RIGHTEAR']]
 
             # Extra check for disabling scars.
-            if int(random.random() * 3):
+            if int(random.random() * 2):
                 condition_scars = {
                     "LEGBITE", "THREE", "NOPAW", "TOETRAP", "NOTAIL", "HALFTAIL", "LEFTEAR", "RIGHTEAR",
                     "MANLEG", "BRIGHTHEART", "NOLEFTEAR", "NORIGHTEAR", "NOEAR", "LEFTBLIND",
