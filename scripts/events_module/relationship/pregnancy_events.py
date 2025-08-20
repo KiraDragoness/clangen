@@ -705,6 +705,7 @@ class Pregnancy_Events:
                     c for c in possible_affair_partners if len(c.mate) < 1
                 ]
 
+
             # even it is a random affair, the cats should not hate each other or something like that
             p_affairs = []
             if len(possible_affair_partners) > 0:
@@ -714,9 +715,10 @@ class Pregnancy_Events:
                         if not p_rel.opposite_relationship:
                             p_rel.link_relationship()
                         p_rel_opp = p_rel.opposite_relationship
-                        if p_rel_opp.like < -20 and p_rel.like < -20:
+                        if not p_rel_opp.like < -20 and not p_rel.like < -20:
                             p_affairs.append(p_affair)
             possible_affair_partners = p_affairs
+            print(f'possible affairs for {cat.name}: {[partner.name for partner in p_affairs]}')
 
             if len(possible_affair_partners) > 0:
                 chosen_affair = choice(possible_affair_partners)
@@ -1054,7 +1056,7 @@ class Pregnancy_Events:
         if not relation.opposite_relationship:
             relation.link_relationship()
 
-        affair_chance = 15
+        affair_chance = 10
         average_romantic_love = (
             relation.romance + relation.opposite_relationship.romance
         ) / 2
@@ -1156,6 +1158,12 @@ class Pregnancy_Events:
                 inverse_chance -= int(inverse_chance * 0.2)
             elif average_trust >= 35:
                 inverse_chance -= int(inverse_chance * 0.1)
+            print(f'Chance for {first_parent.name} having litter with {second_parent.name}: {inverse_chance}')
+        else:
+            inverse_chance = int(inverse_chance * 4)
+            print(f'Chance for {first_parent.name} having outsider litter: {inverse_chance}')
+
+
 
         # AGE
         # - decrease the inverse chance if the whole clan is really old

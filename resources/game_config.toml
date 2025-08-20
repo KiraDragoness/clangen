@@ -185,14 +185,14 @@ dev_tools = false
   primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 250
+  primary_chance_unmated = 100
 
   # 1/chance that a mated cat to has an affair
   random_affair_chance = 50
 
   # special 1/chance for an unmated cat to have an affair
   # for this check, only other unmated cats can be the affair partner
-  unmated_random_affair_chance = 1
+  unmated_random_affair_chance = 2
 
   # The kit number is incremental. It is 1-6 as default so if you change these numbers, you should probably keep this in mind.
   # As in, your max kits number should probably be 5 more than the min kits number.
