@@ -1056,7 +1056,7 @@ class Pregnancy_Events:
         if not relation.opposite_relationship:
             relation.link_relationship()
 
-        affair_chance = 10
+        affair_chance = 15
         average_romantic_love = (
             relation.romance + relation.opposite_relationship.romance
         ) / 2
@@ -1160,7 +1160,7 @@ class Pregnancy_Events:
                 inverse_chance -= int(inverse_chance * 0.1)
             print(f'Chance for {first_parent.name} having litter with {second_parent.name}: {inverse_chance}')
         else:
-            inverse_chance = int(inverse_chance * 4)
+            inverse_chance = int(inverse_chance * 3)
             print(f'Chance for {first_parent.name} having outsider litter: {inverse_chance}')
 
 
