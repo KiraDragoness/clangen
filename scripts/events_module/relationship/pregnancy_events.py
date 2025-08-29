@@ -1160,7 +1160,7 @@ class Pregnancy_Events:
                 inverse_chance -= int(inverse_chance * 0.1)
             print(f'Chance for {first_parent.name} having litter with {second_parent.name}: {inverse_chance}')
         else:
-            inverse_chance = int(inverse_chance * 3)
+            inverse_chance = int(inverse_chance * 4)
             print(f'Chance for {first_parent.name} having outsider litter: {inverse_chance}')
 
 
