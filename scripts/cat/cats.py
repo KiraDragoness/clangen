@@ -704,7 +704,7 @@ class Cat:
             # find what tier of rel they had for each type
             tiers: list[RelTier] = rel_with_dead.get_reltype_tiers()
             for tier in tiers:
-                rel_type = [k for k in rel_type_tiers if tier in k]
+                rel_type = [k for k, v in rel_type_tiers.items() if tier in v]
                 if tier.is_extreme_pos:
                     very_high_types.extend(rel_type)
                 elif tier.is_low_pos:
