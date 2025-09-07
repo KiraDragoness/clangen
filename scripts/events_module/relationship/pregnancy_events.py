@@ -718,7 +718,6 @@ class Pregnancy_Events:
                         if p_rel_opp.like > -20 and p_rel.like > -20:
                             p_affairs.append(p_affair)
             possible_affair_partners = p_affairs
-            print(f'possible affairs for {cat.name}: {[partner.name for partner in p_affairs]}')
 
             if len(possible_affair_partners) > 0:
                 chosen_affair = choice(possible_affair_partners)
@@ -1158,10 +1157,8 @@ class Pregnancy_Events:
                 inverse_chance -= int(inverse_chance * 0.2)
             elif average_trust >= 35:
                 inverse_chance -= int(inverse_chance * 0.1)
-            print(f'Chance for {first_parent.name} having litter with {second_parent.name}: {inverse_chance}')
         else:
             inverse_chance = int(inverse_chance * 4)
-            print(f'Chance for {first_parent.name} having outsider litter: {inverse_chance}')
 
 
 

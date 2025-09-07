@@ -185,7 +185,7 @@ dev_tools = false
   primary_chance_mated = 60
 
   # 1/chance that kits, relationship and other factors will influence this chance
-  primary_chance_unmated = 100
+  primary_chance_unmated = 130
 
   # 1/chance that a mated cat to has an affair
   random_affair_chance = 50
