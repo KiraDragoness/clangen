@@ -49,7 +49,7 @@
     "oat", "lamb", "elk", "flutter", "pollen", "bull", "swish", "tunnel", "horse", "sheep", "burrow", "brush", "cave", "caw",
     "cliff", "crag", "cricket", "frost", "goat", "horn", "lichen", "mound", "point", "ram", "shatter", "steep", "summit", "quake",
     "swamp", "croak", "duck", "bog", "mud", "skipper", "wade", "bug", "turtle", "mire", "mirage", "dune", "canyon", "rattle",
-    "fly", "scorpion", "snake", "serpent"
+    "fly", "scorpion", "snake", "serpent", "grotto", "master", "march", "phantom"
   ],
   "pelt_suffixes": {
     "TwoColour": [],
@@ -157,7 +157,7 @@
     "Barren", "Oasis", "Arid", "Gully", "Wax", "Dingo", "Mirage", "Cobra", "Cheetah", "Caracal", "Antelope", "Gazelle", "Oryx",
     "Camel", "Meerkat", "Skull", "Viper", "Poison", "Venom", "Taipan", "Fang", "Blister", "Blaze", "Smolder", "Jerboa", "Fennec",
     "Mamba", "Addax", "Emu", "Ostrich", "Scarab", "Lemon", "Green", "Mint", "Olive", "Jade", "Cold", "Cobalt", "Deep", "Water",
-    "Rapid", "Emerald", "Glow", "Strong"
+    "Rapid", "Emerald", "Glow", "Strong", "Bile", "Lost", "Marrow", "Hunter", "Phantom"
   ],
 
   "clan_prefixes": [
@@ -489,7 +489,11 @@
     "Oozaru", "Porunga", "Namek", "Beerus", "Whis", "Dende", "Majin Buu", "Babidi", "Dabura", "Gomah", "Glorio", "Panzy", "Zeno", "Trunks", "Chichi", "Gohan", "Goten", "Bulla", "Briefs",
     "Bardock", "Gina", "Kaio", "Nahare", "Kibito", "Friede", "Khasochia", "Assassination Sting", "Chatacabra", "Quematrice", "Arkveld", "Zoh Shia", "Nu Udra", "Jin Dahaad", "Lala Barina", "Ajarakan",
     "Nerscylla", "Gypceros", "Yian Kutku", "Seikret", "Suja", "Allhearken", "Wyveria", "Blangonga", "Congalala", "Mizutsune", "Rompopolo", "Hirabami", "Gore Magala", "Balahara", "Gravios", "Xu Wu",
-    "Frieren", "Himmel", "Heiter", "Eisen", "Fern", "Stark", "Sein", "Kraft", "Kunafa", "Azuz", "Denken", "Methode", "Ubel", "Elf", "Zoltraak", "Sense", "Genau", "Serie", "Flamme", "Macht", "Solitar"
+    "Frieren", "Himmel", "Heiter", "Eisen", "Fern", "Stark", "Sein", "Kraft", "Kunafa", "Azuz", "Denken", "Methode", "Ubel", "Elf", "Zoltraak", "Sense", "Genau", "Serie", "Flamme", "Macht", "Solitar",
+    "Shakra", "Sherma", "Mooshka", "Kratt", "Vog", "Lace", "Grand Mother Silk", "Trobbio", "Skarrsinger Karmelita", "Pharloom", "Citadel", "Grindle", "Fleatopia",
+    "Varga", "Grishkin", "Seth", "Pebb", "Forge Daughter", "Jubilana", "Creige", "Flick", "Seamstress", "Green Prince", "Garmond", "Zaza", "Yarnaby", "Pilby", "Chapel Maid",
+    "Loddie", "Loam", "Karak", "Crust King Khann", "Last Judge", "Red Maiden", "Sinner", "Fourth Chorus", "Bell Beast", "Bellhart", "Scrounge", "Pavo", "Plinney",
+    "Poshanka", "Mergwin", "Zango", "Zylotol", "Crull", "Benjin", "Tipp", "Pill", "Cardinius", "Pious Isamor"
   ],
 	"animal_suffixes": [
 		"badger", "bat", "bear", "bee", "beetle", "bird", "bug", "cricket", "deer", "eagle", "elk", "falcon", "fawn", "fish", "fox", "goose", "hare", "hawk", "horse", 
