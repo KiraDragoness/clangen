@@ -15,7 +15,7 @@ from random import choice, randint
 import pygame
 import ujson
 
-from scripts.cat.cats import Cat, cat_class
+from scripts.cat.cats import Cat, cat_class, BACKSTORIES
 from scripts.cat.enums import CatRank, CatGroup
 from scripts.cat.names import names
 from scripts.cat.save_load import (
@@ -203,7 +203,10 @@ class Clan:
         )
 
         self.instructor = Cat(
-            status_dict={"rank": instructor_rank, "group": CatGroup.STARCLAN},
+            status_dict={"rank": instructor_rank, "group_ID": CatGroup.STARCLAN_ID},
+            backstory=choice(
+                BACKSTORIES["backstory_categories"]["clan_guide_backstories"]
+            ),
         )
 
         self.instructor.dead = True
@@ -231,11 +234,13 @@ class Clan:
 
         # give thoughts,actions and relationships to cats
         for cat_id in Cat.all_cats:
-            Cat.all_cats.get(cat_id).init_all_relationships()
-            Cat.all_cats.get(cat_id).backstory = "clan_founder"
-            if Cat.all_cats.get(cat_id).status.rank == CatRank.APPRENTICE:
-                Cat.all_cats.get(cat_id).rank_change(CatRank.APPRENTICE)
-            Cat.all_cats.get(cat_id).thoughts()
+            the_cat = Cat.all_cats.get(cat_id)
+            the_cat.init_all_relationships()
+            if the_cat != self.instructor:
+                the_cat.backstory = "clan_founder"
+            if the_cat.status.rank == CatRank.APPRENTICE:
+                the_cat.rank_change(CatRank.APPRENTICE)
+            the_cat.thoughts()
 
         save_cats(game.clan.name, Cat, game)
         number_other_clans = randint(3, 5)
@@ -730,6 +735,8 @@ class Clan:
 
         if clan_data.get("used_group_IDs"):
             game.used_group_IDs = clan_data["used_group_IDs"]
+            for ID in game.used_group_IDs:
+                game.used_group_IDs[ID] = CatGroup(game.used_group_IDs[ID])
 
         game.clan.reputation = max(0, min(100, int(clan_data["reputation"])))
 
@@ -779,10 +786,10 @@ class Clan:
 
         if "other_clans" in clan_data:
             for other_clan in clan_data["other_clans"]:
-                if not other_clan.get("ID"):
+                if not other_clan.get("group_ID"):
                     ID = game.get_free_group_ID(CatGroup.OTHER_CLAN)
                 else:
-                    ID = other_clan["ID"]
+                    ID = other_clan["group_ID"]
                 game.clan.all_other_clans.append(
                     OtherClan(
                         name=other_clan["name"],
