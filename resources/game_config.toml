@@ -268,7 +268,7 @@ dev_tools = false
   always_name_after_appearance = false
 
   # allows cats to be named after the color of their eyes
-  allow_eye_names = true
+  allow_eye_names = false
 
 [accessory_generation]
   # base 1/chance a cat generates with an accessory 
@@ -417,7 +417,7 @@ dev_tools = false
   base_random_murder_chance = 25
 
   # base 1/chance a disliked cat will be murdered
-  base_murder_kill_chance = 80
+  base_murder_kill_chance = 100
 
   # age cats will start dying of old age based on old_age_death_curve
   old_age_death_start = 150

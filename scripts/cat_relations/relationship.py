@@ -414,7 +414,7 @@ class Relationship:
             else:
                 if rel_type == RelType.ROMANCE:
                     continue
-                if attr > 0:
+                if attr < 0:
                     value_weights[rel_type] += int(abs(attr / 10))
 
         # increase the chance of a romance interaction if they are already mates

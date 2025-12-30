@@ -49,7 +49,7 @@
     "oat", "lamb", "elk", "flutter", "pollen", "bull", "swish", "tunnel", "horse", "sheep", "burrow", "brush", "cave", "caw",
     "cliff", "crag", "cricket", "frost", "goat", "horn", "lichen", "mound", "point", "ram", "shatter", "steep", "summit", "quake",
     "swamp", "croak", "duck", "bog", "mud", "skipper", "wade", "bug", "turtle", "mire", "mirage", "dune", "canyon", "rattle",
-    "fly", "scorpion", "snake", "serpent", "grotto", "master", "march", "phantom"
+    "fly", "scorpion", "snake", "serpent", "grotto", "master", "march", "phantom", "leviathan"
   ],
   "pelt_suffixes": {
     "TwoColour": [],
@@ -157,7 +157,7 @@
     "Barren", "Oasis", "Arid", "Gully", "Wax", "Dingo", "Mirage", "Cobra", "Cheetah", "Caracal", "Antelope", "Gazelle", "Oryx",
     "Camel", "Meerkat", "Skull", "Viper", "Poison", "Venom", "Taipan", "Fang", "Blister", "Blaze", "Smolder", "Jerboa", "Fennec",
     "Mamba", "Addax", "Emu", "Ostrich", "Scarab", "Lemon", "Green", "Mint", "Olive", "Jade", "Cold", "Cobalt", "Deep", "Water",
-    "Rapid", "Emerald", "Glow", "Strong", "Bile", "Lost", "Marrow", "Hunter", "Phantom"
+    "Rapid", "Emerald", "Glow", "Strong", "Bile", "Lost", "Marrow", "Hunter", "Phantom", "Leviathan"
   ],
 
   "clan_prefixes": [
