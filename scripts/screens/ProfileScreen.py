@@ -308,6 +308,8 @@ class ProfileScreen(Screens):
                     self.update_disabled_buttons_and_text()
                 # if the cat is dead, moves them to the opposite afterlife
                 if self.the_cat.dead:
+                    game.updated_afterlife_cats.add(self.the_cat)
+
                     if self.the_cat == game.clan.instructor:
                         # DF -> SC
                         if self.the_cat.status.group == CatGroup.DARK_FOREST:
@@ -1401,7 +1403,7 @@ class ProfileScreen(Screens):
                 )
 
                 if moons:
-                    new_text += f" (Moon {scar['moon']})"
+                    new_text += f" ({i18n.t('general.moon_date', moon=scar['moon'])})"
 
                 # checking to see if we can throw out a duplicate
                 if new_text in scar_text:
@@ -1552,7 +1554,9 @@ class ProfileScreen(Screens):
                 )
 
             if switch_get_value(Switch.show_history_moons):
-                graduation_history += f" (moon {app_ceremony['moon']})"
+                graduation_history += (
+                    f" ({i18n.t('general.moon_date', moon=app_ceremony['moon'])})"
+                )
         cat_dict = {"m_c": (str(self.the_cat.name), choice(self.the_cat.pronouns))}
         apprenticeship_history = influence_history + " " + graduation_history
         apprenticeship_history = process_text(apprenticeship_history, cat_dict)
