@@ -904,6 +904,25 @@ class Cat:
         else:
             return "general"
 
+    def leave_clan(self, new_social_status: CatSocial):
+        """Removes cat from the Clan willingly. Makes status changes and removes apprentices."""
+        if not new_social_status:
+            new_social_status = choice(
+                (CatSocial.KITTYPET, CatSocial.LONER, CatSocial.ROGUE)
+            )
+        self.status.leave_group(new_social_status=new_social_status)
+        self.get_new_thought()
+
+        for app in self.apprentice.copy():
+            app_ob = Cat.fetch_cat(app)
+            if app_ob:
+                app_ob.update_mentor()
+
+        self.update_mentor()
+
+        for x in self.apprentice:
+            Cat.fetch_cat(x).update_mentor()
+
     def become_lost(self):
         """Makes a Clan cat a lost cat. Makes status changes and removes apprentices."""
 
@@ -1905,7 +1924,14 @@ class Cat:
                 "event_triggered": new_illness.new,
             }
 
-    def get_injured(self, name, event_triggered=False, lethal=True, severity="default"):
+    def get_injured(
+        self,
+        name,
+        event_triggered=False,
+        lethal=True,
+        potential_scars=None,
+        severity="default",
+    ):
         """Add an injury to this cat.
 
         :param name: The injury to add
@@ -1914,6 +1940,8 @@ class Cat:
         :type event_triggered: bool, optional
         :param lethal: _description_, defaults to True
         :type lethal: bool, optional
+        :param potential_scars: List of possible scars to get upon healing, defaults to None
+        :type potential_scars: array, optional
         :param severity: _description_, defaults to 'default'
         :type severity: str, optional
         """
@@ -1963,6 +1991,7 @@ class Cat:
             also_got=injury["also_got"],
             cause_permanent=injury["cause_permanent"],
             event_triggered=event_triggered,
+            potential_scars=potential_scars,
         )
 
         if new_injury.name not in self.injuries:
@@ -1976,6 +2005,7 @@ class Cat:
                 "complication": None,
                 "cause_permanent": new_injury.cause_permanent,
                 "event_triggered": new_injury.new,
+                "potential_scars": new_injury.potential_scars,
             }
 
         if len(new_injury.also_got) > 0 and not int(random() * 5):
@@ -2742,6 +2772,8 @@ class Cat:
             if not os.path.exists(relation_cat_directory):
                 self.init_all_relationships()
                 for cat in Cat.all_cats.values():
+                    if cat == self:
+                        continue
                     cat.create_one_relationship(self)
                 return
             try:
