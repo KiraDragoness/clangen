@@ -9,9 +9,7 @@ from scripts.cat.cats import Cat
 from scripts.cat.enums import CatSocial
 from scripts.game_structure import game
 from scripts.game_structure.screen_settings import MANAGER
-from scripts.game_structure.ui_elements import (
-    UICheckbox,
-)
+from scripts.ui.elements.checkbox import UICheckbox
 from scripts.ui.elements.image_button import UIImageButton
 from scripts.ui.elements.surface_image_button import UISurfaceImageButton
 from scripts.screens.enums import GameScreen
@@ -75,8 +73,6 @@ class LeaveClanWindow(GameWindow):
         )
 
     def process_event(self, event):
-        super().process_event(event)
-
         if event.type == pygame_gui.UI_BUTTON_START_PRESS:
             if event.ui_element == self.done_button:
                 self.the_cat.leave_clan(self.chosen_social)
@@ -94,3 +90,4 @@ class LeaveClanWindow(GameWindow):
                     else:
                         button.check()
                         self.chosen_social = CatSocial(name)
+        return super().process_event(event)

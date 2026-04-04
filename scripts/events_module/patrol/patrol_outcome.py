@@ -23,7 +23,7 @@ from scripts.events_module.consequences import (
     gather_cat_objects,
     unpack_rel_block,
 )
-from scripts.events_module.event_filters import filter_relationship_type
+from scripts.events_module.event_filters import filter_relationship_type, event_for_cat
 from scripts.clan_package.cotc import change_clan_reputation, change_clan_relations
 from scripts.game_structure import game
 from scripts.cat.skills import SkillPath
@@ -154,7 +154,6 @@ class PatrolOutcome:
             if not filter_relationship_type(
                 group=patrol.patrol_cats,
                 filter_types=outcome.relationship_constraints,
-                event_id=patrol.patrol_event.patrol_id,
                 patrol_leader=patrol.patrol_leader,
             ):
                 continue
@@ -230,11 +229,13 @@ class PatrolOutcome:
 
         return outcome_list
 
-    def execute_outcome(self, patrol: "Patrol") -> Tuple[str, str, Optional[str]]:
+    def execute_outcome(self, patrol: "Patrol") -> Tuple[str, str, list, Optional[str]]:
         """
         Executes the outcome. Returns a tuple with the final outcome text, the results text, and any outcome art
-        format: (Outcome text, results text, outcome art (might be None))
+        :returns: Outcome text, results text, list of created rel logs (might be empty), outcome art (might be None)
         """
+        rel_results = {}
+
         # This must be done before text processing so that the new cat's pronouns are generated first
         results = [self._handle_new_cats(patrol)]
 
@@ -274,7 +275,14 @@ class PatrolOutcome:
                         other_clan=patrol.other_clan,
                     )
 
-        results.append(self._handle_relationship_changes(patrol))
+        rel_results.update(
+            unpack_rel_block(
+                Cat, self.relationship_effects, patrol, stat_cat=self.stat_cat
+            )
+        )
+        if self.relationship_effects:
+            results.append(i18n.t(f"screens.patrol.relationship_changed"))
+
         results.append(self._handle_rep_changes())
         results.append(self._handle_other_clan_relations(patrol))
         results.append(self._handle_prey(patrol))
@@ -289,15 +297,7 @@ class PatrolOutcome:
 
         print("PATROL END -----------------------------------------------------")
 
-        return processed_text, " ".join(results), self.get_outcome_art()
-
-    def _handle_relationship_changes(self, patrol) -> str:
-        unpack_rel_block(Cat, self.relationship_effects, patrol, stat_cat=self.stat_cat)
-
-        if self.relationship_effects:
-            return i18n.t(f"screens.patrol.relationship_changed")
-        else:
-            return ""
+        return processed_text, " ".join(results), rel_results, self.get_outcome_art()
 
     def _handle_future_event(self, patrol):
         """
@@ -425,10 +425,13 @@ class PatrolOutcome:
 
         actual_stat_cats = []
         for kitty in possible_stat_cats:
-            if kitty.personality.trait in self.stat_trait:
-                actual_stat_cats.append(kitty)
-
-            if kitty.skills.check_skill_requirement_list(self.stat_skill):
+            if event_for_cat(
+                {
+                    "skill": self.stat_skill,
+                    "trait": self.stat_trait,
+                },
+                kitty,
+            ):
                 actual_stat_cats.append(kitty)
 
         if actual_stat_cats:
