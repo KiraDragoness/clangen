@@ -555,6 +555,18 @@ class ProfileScreen(Screens):
         if self.the_cat is None:
             return
 
+        # initialize thoughts if they have none
+        if not self.the_cat.thought:
+            if self.the_cat.status.is_other_clancat:
+                # this isn't great, but it's only being run if someone checks an
+                # other clan cat when booting the game before doing a timeskip
+                other_clan_cats = [
+                    c for c in Cat.all_cats_list if c.status.is_other_clancat
+                ]
+                self.the_cat.get_new_thought(other_clan_cats=other_clan_cats)
+            else:
+                self.the_cat.get_new_thought()
+
         # Info in string
         cat_name = str(self.the_cat.name)
         cat_name = shorten_text_to_fit(cat_name, 500, 20)
@@ -725,9 +737,9 @@ class ProfileScreen(Screens):
         output = ""
         # SEX/GENDER
         if the_cat.genderalign is None or the_cat.genderalign == the_cat.gender:
-            output += the_cat.get_gender_string()
+            output += the_cat.gender_string
         else:
-            output += the_cat.get_genderalign_string()
+            output += the_cat.genderalign_string
         # NEWLINE ----------
         output += "\n"
 
@@ -1012,7 +1024,7 @@ class ProfileScreen(Screens):
 
         # EXPERIENCE
         output += i18n.t(
-            "screens.profile.experience_label", exp=the_cat.experience_level
+            "screens.profile.experience_label", exp=the_cat.experience_level_string
         )
         if get_clan_setting("showxp"):
             output += " (" + str(the_cat.experience) + ")"
