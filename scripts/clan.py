@@ -143,7 +143,7 @@ class Clan:
         self.other_clan_IDs = []
 
         self.starting_members = starting_members
-        if game_mode in ("expanded", "cruel season"):
+        if game_mode in ("expanded", "cruel_season"):
             self.freshkill_pile = FreshkillPile()
         else:
             self.freshkill_pile = None
@@ -277,18 +277,7 @@ class Clan:
         save_cats(game.clan.name, Cat, game)
         number_other_clans = randint(3, 5)
         for _ in range(number_other_clans):
-            other_clan_names = [str(i.name) for i in self.all_other_clans] + [
-                game.clan.displayname
-            ]
-            other_clan_name = choice(
-                names.names_dict["normal_prefixes"] + names.names_dict["clan_prefixes"]
-            )
-            while other_clan_name in other_clan_names:
-                other_clan_name = choice(
-                    names.names_dict["normal_prefixes"]
-                    + names.names_dict["clan_prefixes"]
-                )
-            other_clan = OtherClan(name=other_clan_name)
+            other_clan = OtherClan()
             self.all_other_clans.append(other_clan)
 
         # remove any already loaded points of interest
@@ -503,7 +492,7 @@ class Clan:
         self.save_pregnancy(game.clan)
 
         save_clan_settings()
-        if game.clan.game_mode in ("expanded", "cruel season"):
+        if game.clan.game_mode in ("expanded", "cruel_season"):
             self.save_freshkill_pile(game.clan)
 
         safe_save(f"{get_save_dir()}/{self.name}/clan.json", clan_data)
@@ -1376,9 +1365,17 @@ class OtherClan:
             self.group_ID = game.get_free_group_ID(CatGroup.OTHER_CLAN)
         game.clan.other_clan_IDs.append(self.group_ID)
 
-        clan_names = names.names_dict["normal_prefixes"]
-        clan_names.extend(names.names_dict["clan_prefixes"])
-        self.name = name or choice(clan_names)
+        self.name = name
+        if not self.name:  # find name if clan has no name yet
+            used_names = [str(i.name) for i in game.clan.all_other_clans] + [
+                game.clan.displayname
+            ]
+            clan_names = names.names_dict["normal_prefixes"]
+            clan_names.extend(names.names_dict["clan_prefixes"])
+            self.name = choice(clan_names)
+            while self.name in used_names:  # making sure we don't repeat a name
+                self.name = choice(clan_names)
+
         self.relations = relations or randint(8, 12)
 
         self.temperament: tuple[str, str]
