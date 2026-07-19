@@ -1336,7 +1336,7 @@ class Pregnancy_Events:
         living_cats = len(
             [i for i in Cat.all_cats.values() if i.status.alive_in_player_clan]
         )
-        if living_cats < 10:
+        if living_cats < 20:
             inverse_chance = int(inverse_chance * 0.5)
         elif living_cats > 30:
             inverse_chance = int(inverse_chance * (living_cats / 30))
@@ -1423,7 +1423,7 @@ class Pregnancy_Events:
             or second_parent
             and second_parent.ID in Pregnancy_Events.biggest_family
         ):
-            inverse_chance = int(inverse_chance * 1.7)
+            inverse_chance = int(inverse_chance * 1.5)
 
         # - decrease inverse chance if the current family is small
         if len(first_parent.get_relatives(get_clan_setting("first cousin mates"))) < (
