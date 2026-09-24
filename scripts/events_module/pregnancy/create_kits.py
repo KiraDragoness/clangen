@@ -624,4 +624,9 @@ def get_balanced_kit_chance(first_parent: Cat, second_parent: Cat, is_affair) ->
     if settings_allow and biggest_family_is_big():
         inverse_chance = int(inverse_chance * 0.9)
 
+    if not second_parent:
+        print(f'No second parent for {first_parent.name}, current kit chance: {inverse_chance}')
+        inverse_chance = int(inverse_chance * 3)
+        print(f'Corrected chance: {inverse_chance}')
+
     return inverse_chance
