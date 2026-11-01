@@ -1,8 +1,8 @@
 import subprocess
 
 import pygame
-from pygame_gui.elements import UITextBox
 from scripts.game_structure.screen_settings import MANAGER
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 from scripts.housekeeping.game_version import get_version_info
 from scripts.ui.windows.window_base_class import GameWindow
 from scripts.ui.scale import ui_scale
@@ -15,9 +15,10 @@ class ChangelogWindow(GameWindow):
             ui_scale(pygame.Rect((150, 150), (500, 400))),
         )
 
-        self.changelog_popup_title = UITextBox(
+        self.changelog_popup_title = UITextBoxTweaked(
             "windows.whats_new",
             ui_scale(pygame.Rect((0, 10), (500, -1))),
+            line_spacing=1,
             object_id="#changelog_popup_title",
             container=self,
             anchors={"centerx": "centerx"},
@@ -25,9 +26,10 @@ class ChangelogWindow(GameWindow):
 
         current_version_number = "{:.16}".format(get_version_info().version_number)
 
-        self.changelog_popup_subtitle = UITextBox(
+        self.changelog_popup_subtitle = UITextBoxTweaked(
             "windows.version_title",
             ui_scale(pygame.Rect((0, 35), (500, -1))),
+            line_spacing=1,
             object_id="#changelog_popup_subtitle",
             container=self,
             anchors={"centerx": "centerx"},
@@ -81,11 +83,11 @@ class ChangelogWindow(GameWindow):
                 # Format: DATE- \n PR Title (link)
                 file_cont += f"<b>{info[1]}</b>\n- {info[2]}\n"
 
-        self.changelog_text = UITextBox(
+        self.changelog_text = UITextBoxTweaked(
             file_cont,
             ui_scale(pygame.Rect((10, 65), (480, 325))),
             object_id="#text_box_30",
-            # line_spacing=0.95,
+            line_spacing=0.95,
             starting_height=2,
             container=self,
             manager=MANAGER,

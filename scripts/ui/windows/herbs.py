@@ -14,6 +14,7 @@ from scripts.game_structure.game.switches import (
     switch_set_value,
 )
 from scripts.game_structure.screen_settings import MANAGER
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 from scripts.ui.elements.image_button import UIImageButton
 from scripts.ui.elements.surface_image_button import UISurfaceImageButton
 from scripts.screens.enums import GameScreen
@@ -50,7 +51,7 @@ class HerbManagementWindow(GameWindow):
         else:
             log_text.extend(game.herb_events_list.copy())
 
-        self.log = pygame_gui.elements.UITextBox(
+        self.log = UITextBoxTweaked(
             f"{f'<br>-------------------------------<br>'.join(log_text)}<br>",
             ui_scale(pygame.Rect((25, 25), (500, 250))),
             object_id="#text_box_26_horizleft_verttop_pad_14_0_10",

@@ -3,14 +3,16 @@ from typing import Optional, Union, Dict
 import pygame
 from pygame_gui.core import IContainerLikeInterface, UIElement, ObjectID
 from pygame_gui.core.interfaces import IUIManagerInterface
-from pygame_gui.elements import UIStatusBar, UITextBox
+from pygame_gui.elements import UIStatusBar
+
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 
 
 class UIUpdateProgressBar(UIStatusBar):
     status_text: str
     step_count: int
     step_value: float
-    step_label: UITextBox
+    step_label: UITextBoxTweaked
     steps_taken: int
     maximum_progress: int
     scaling_factor: float
@@ -20,7 +22,7 @@ class UIUpdateProgressBar(UIStatusBar):
     def __init__(
         self,
         relative_rect: pygame.Rect,
-        step_label: UITextBox = None,
+        step_label: UITextBoxTweaked = None,
         manager: Optional[IUIManagerInterface] = None,
         container: Optional[IContainerLikeInterface] = None,
         parent_element: Optional[UIElement] = None,

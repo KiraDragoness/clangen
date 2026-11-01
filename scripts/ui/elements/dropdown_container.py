@@ -63,7 +63,7 @@ class UIDropDownContainer(UIAutoResizingContainer):
         self.child_button_container.hide()
 
         self.resize_bottom = False
-        self.should_update_dimensions = True
+        self.set_dimensions(self.parent_button.get_relative_rect().size)
 
         self.is_open = False
 
@@ -96,7 +96,10 @@ class UIDropDownContainer(UIAutoResizingContainer):
 
     def check_if_hovering(self):
         mouse_x, mouse_y = self.ui_manager.get_mouse_position()
-        return self.hover_point(mouse_x, mouse_y)
+        if self.hover_point(mouse_x, mouse_y):
+            return True
+        else:
+            return False
 
     def update(self, time_delta: float):
         # hover
@@ -104,7 +107,7 @@ class UIDropDownContainer(UIAutoResizingContainer):
             if self.check_if_hovering():
                 if not self.is_open and self.parent_button.hovered:
                     self.open()
-            elif self.is_open:
+            else:
                 self.close()
         # press
         else:

@@ -7,6 +7,7 @@ from scripts.game_structure.game.switches import (
     Switch,
 )
 from scripts.game_structure.screen_settings import MANAGER
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 from scripts.ui.elements.surface_image_button import UISurfaceImageButton
 from scripts.screens.enums import GameScreen
 from scripts.ui.generate_button import get_button_dict, ButtonStyles
@@ -22,9 +23,10 @@ class NoMediatorsWindow(GameWindow):
             click_outside_to_close=False,
         )
 
-        self.missing_info = pygame_gui.elements.UITextBox(
+        self.missing_info = UITextBoxTweaked(
             "windows.no_mediators",
             ui_scale(pygame.Rect((0, 30), (220, -1))),
+            line_spacing=1,
             manager=MANAGER,
             object_id="#text_box_30_horizcenter",
             container=self,

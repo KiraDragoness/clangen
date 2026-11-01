@@ -17,6 +17,7 @@ from scripts.ui.elements.cruel_card_icon import UICruelCardIcon
 from scripts.ui.elements.cruel_card_large import UICruelCardLarge
 from scripts.ui.elements.modified_image import UIModifiedImage
 from scripts.ui.elements.surface_image_button import UISurfaceImageButton
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 from scripts.ui.generate_box import get_box, BoxStyles
 from scripts.ui.generate_button import ButtonStyles, get_button_dict
 from scripts.ui.icon import Icon
@@ -190,9 +191,9 @@ class ChooseCardsScreen(MakeClanScreenBase):
 
         # RANDOM CARD
         self.elements["random_card"] = UISurfaceImageButton(
-            ui_scale(pygame.Rect((92, -10), (37, 37))),
+            ui_scale(pygame.Rect((92, -10), (34, 34))),
             Icon.DICE,
-            get_button_dict(ButtonStyles.ICON_TAB_RIGHT, (37, 37)),
+            get_button_dict(ButtonStyles.ICON_TAB_RIGHT, (34, 34)),
             object_id="@buttonstyles_icon_tab_right",
             manager=MANAGER,
             sound_id="dice_roll",
@@ -203,9 +204,9 @@ class ChooseCardsScreen(MakeClanScreenBase):
             tool_tip_text="screens.make_clan.random_card",
         )
         self.elements["decklist"] = UISurfaceImageButton(
-            ui_scale(pygame.Rect((92, 10), (37, 37))),
+            ui_scale(pygame.Rect((92, 10), (34, 34))),
             Icon.NOTEPAD,
-            get_button_dict(ButtonStyles.ICON_TAB_RIGHT, (37, 37)),
+            get_button_dict(ButtonStyles.ICON_TAB_RIGHT, (34, 34)),
             object_id="@buttonstyles_icon_tab_right",
             manager=MANAGER,
             anchors={
@@ -253,7 +254,7 @@ class ChooseCardsScreen(MakeClanScreenBase):
             manager=MANAGER,
             container=self.elements["card_info_container"],
         )
-        self.elements["card_description"] = pygame_gui.elements.UITextBox(
+        self.elements["card_description"] = UITextBoxTweaked(
             "",
             ui_scale(pygame.Rect((0, -10), (280, 80))),
             object_id=get_text_box_theme("#text_box_22_horizleft_spacing_95"),

@@ -7,6 +7,7 @@ from pygame_gui.core.gui_type_hints import RectLike, Coordinate
 from pygame_gui.core.interfaces import IUIManagerInterface
 
 from scripts.game_input import INPUT_ACTION_PRESSED, Action, INPUT_ACTION_RELEASED
+from scripts.ui.elements.text_box_tweaked import UITextBoxTweaked
 from scripts.ui.icon import Icon
 from scripts.ui.scale import ui_scale_value
 
@@ -85,25 +86,15 @@ class UISurfaceImageButton(pygame_gui.elements.UIButton):
                 ),
             }
 
-        self._normal_images = (
-            image_dict["normal"]
-            if type(image_dict["normal"]) in [list, tuple]
-            else [image_dict["normal"]]
+        self._normal_image = image_dict["normal"]
+        self._hovered_image = (
+            image_dict["hovered"] if "hovered" in image_dict else self.normal_image
         )
-        self._hovered_images = (
-            image_dict.get("hovered", self._normal_images)
-            if type(image_dict.get("hovered", self._normal_images)) in [list, tuple]
-            else [image_dict["hovered"]]
+        self._selected_image = (
+            image_dict["selected"] if "selected" in image_dict else self.normal_image
         )
-        self._selected_images = (
-            image_dict.get("selected", self._normal_images)
-            if type(image_dict.get("selected", self._normal_images)) in [list, tuple]
-            else [image_dict["selected"]]
-        )
-        self._disabled_images = (
-            image_dict.get("disabled", self._normal_images)
-            if type(image_dict.get("disabled", self._normal_images)) in [list, tuple]
-            else [image_dict["disabled"]]
+        self._disabled_image = (
+            image_dict["disabled"] if "disabled" in image_dict else self.normal_image
         )
         super().__init__(
             relative_rect,
@@ -143,7 +134,7 @@ class UISurfaceImageButton(pygame_gui.elements.UIButton):
                 text_rect.y -= ui_scale_value(1)
 
             self.set_text("")
-            self.text_layer = pygame_gui.elements.UITextBox(
+            self.text_layer = UITextBoxTweaked(
                 temp_text,
                 text_rect,
                 object_id=(
@@ -154,7 +145,7 @@ class UISurfaceImageButton(pygame_gui.elements.UIButton):
                 container=container,
                 starting_height=self.starting_height,
                 anchors=self.anchors,
-                # line_spacing=0.95,
+                line_spacing=0.95,
                 visible=visible,
             )
             self.join_focus_sets(self.text_layer)
@@ -286,33 +277,33 @@ class UISurfaceImageButton(pygame_gui.elements.UIButton):
         return super().process_event(event)
 
     @property
-    def normal_images(self):
-        return self._normal_images
+    def normal_image(self):
+        return self._normal_image
 
-    @normal_images.setter
-    def normal_images(self, val):
+    @normal_image.setter
+    def normal_image(self, val):
         pass
 
     @property
-    def hovered_images(self):
-        return self._hovered_images
+    def hovered_image(self):
+        return self._hovered_image
 
-    @hovered_images.setter
-    def hovered_images(self, val):
+    @hovered_image.setter
+    def hovered_image(self, val):
         pass
 
     @property
-    def selected_images(self):
-        return self._selected_images
+    def selected_image(self):
+        return self._selected_image
 
-    @selected_images.setter
-    def selected_images(self, val):
+    @selected_image.setter
+    def selected_image(self, val):
         pass
 
     @property
-    def disabled_images(self):
-        return self._disabled_images
+    def disabled_image(self):
+        return self._disabled_image
 
-    @disabled_images.setter
-    def disabled_images(self, val):
+    @disabled_image.setter
+    def disabled_image(self, val):
         pass
