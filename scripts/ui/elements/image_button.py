@@ -6,10 +6,6 @@ from pygame_gui.core import IContainerLikeInterface, UIElement, ObjectID
 from pygame_gui.core.gui_type_hints import RectLike, Coordinate
 from pygame_gui.core.interfaces import IUIManagerInterface
 
-from scripts.game_input import INPUT_ACTION_PRESSED, Action, INPUT_ACTION_RELEASED
-from scripts.game_structure import game
-from scripts.game_structure.screen_settings import screen
-
 
 class UIImageButton(pygame_gui.elements.UIButton):
     """Subclass of pygame_gui's button class. This allows for auto-scaling of the
@@ -190,63 +186,17 @@ class UIImageButton(pygame_gui.elements.UIButton):
     def return_sound_id(self):
         return self.sound_id
 
-    def hover_point(self, hover_x: int, hover_y: int) -> bool:
-        if self.mask is None:
-            return self.rect.collidepoint((hover_x, hover_y))
-        pos_in_mask = (hover_x - self.mask_info[0][0], hover_y - self.mask_info[0][1])
-        if (
-            0 <= pos_in_mask[0] < self.mask.get_size()[0]
-            and 0 <= pos_in_mask[1] < self.mask.get_size()[1]
-        ):
-            return bool(self.mask.get_at(pos_in_mask))
-        else:
-            return False
-
-    def check_hover(self, time_delta: float, hovered_higher_element: bool) -> bool:
-        hover = super().check_hover(time_delta, hovered_higher_element)
-        if game.debug_settings["showbounds"] and self.mask is not None:
-            if hover:
-                pygame.draw.lines(screen, (0, 255, 0), True, self.mask_info[1], width=2)
-            else:
-                pygame.draw.lines(screen, (255, 0, 0), True, self.mask_info[1], width=2)
-        return hover
-
     def focus(self):
+        if not self.is_enabled or not self.visible:
+            return  # early return to prevent focusing of disabled buttons
         super().focus()
         self.drawable_shape.set_active_state("hovered")
-        if self.tool_tip is None and self.tool_tip_text is not None:
-            self.tool_tip = self.ui_manager.create_tool_tip(
-                text=self.tool_tip_text,
-                position=(self.get_abs_rect().bottomright, self.rect.centery),
-                hover_distance=(0, int(self.rect.height / 2)),
-                parent_element=self,
-                object_id=self.tool_tip_object_id,
-                wrap_width=self.tool_tip_wrap_width,
-                text_kwargs=self.tool_tip_text_kwargs,
-            )
 
     def unfocus(self):
-        if self.hovered:
+        if not self.is_enabled:
+            self.drawable_shape.set_active_state("disabled")
+        elif self.hovered:
             self.drawable_shape.set_active_state("hovered")
         else:
             self.drawable_shape.set_active_state("normal")
-        if self.tool_tip is not None:
-            self.tool_tip.kill()
-            self.tool_tip = None
         super().unfocus()
-
-    def process_event(self, event: pygame.event.Event) -> bool:
-        if self.is_focused and event.type == INPUT_ACTION_PRESSED:
-            if event.action == Action.CONFIRM:
-                self.on_self_event(
-                    pygame_gui.UI_BUTTON_START_PRESS,
-                    {"mouse_button": pygame.BUTTON_LEFT},
-                )
-        elif self.is_focused and event.type == INPUT_ACTION_RELEASED:
-            if event.action == Action.CONFIRM:
-                self.on_self_event(
-                    pygame_gui.UI_BUTTON_PRESSED,
-                    {"mouse_button": pygame.BUTTON_LEFT},
-                )
-
-        return super().process_event(event)
