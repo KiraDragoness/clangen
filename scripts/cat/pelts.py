@@ -91,7 +91,7 @@ class Pelt:
     spotted: list = pelt_categories["spotted"]
     plain: list = pelt_categories["plain"]
     exotic: list = pelt_categories["exotic"]
-    torties: list = pelt_categories["torties"]
+
 
     """
     # PELT SPRITE NAMES
@@ -110,8 +110,9 @@ class Pelt:
 
     # TORTIE PATCHES
     tortie_patches: list = list(sprites.TORTIE_PATCH_COMBOS.keys())
-    for sprite_list in sprites.TORTIE_DATA["sprite_list"]:
-        tortie_patches.extend(sprite_list)
+    for sprite_list in sprites.TORTIE_DATA["sprite_list"].values():
+        for row in sprite_list:
+            tortie_patches.extend(row)
 
     # WHITE MARKINGS
     little_white: list = list(sprites.WHITE_PATCH_COMBOS.get("little", {}).keys())
